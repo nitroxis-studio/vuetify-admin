@@ -1,0 +1,88 @@
+$body-font-family: 'Ubuntu', serif;
+$title-font: 'Ubuntu', serif;
+$primary: #1d3557;
+$secondary: #464646;
+$accent: #EF3D23;
+$error: #f00;
+$info: #2196F3;
+$warn: #E06A4D;
+
+.v-application {
+  font-family: $body-font-family, sans-serif !important;
+   .title { // To pin point specific classes of some components
+      font-family: $title-font, sans-serif !important;
+   }
+}
+.w-full {
+  width: 100%;
+}
+.v-btn {
+  font-weight: bold !important;
+}
+.no-message{
+
+  .v-text-field__details {
+    display: none !important;
+  }
+  .v-input__slot {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+.text-small {
+  font-size: 12px;
+}
+.border-primary {
+  border: 1px solid $primary !important;
+}
+
+.full-page {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+[padding] > * {
+  padding: 1em;
+}
+[margin] > * {
+  margin: 1em;
+  
+}
+[margin].no-outer{
+  >:first-child {
+    margin-left: 0 !important;
+  }
+  >:last-child {
+    margin-right: 0 !important;
+  }
+}
+.pointer-cursor {
+  cursor: pointer;
+}
+#loading-bg {
+  width: 100%;
+  height: 100%;
+  background: #f2f2f2;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.overlay-left,  .overlay-right,  .overlay-top,  .overlay-bottom   {
+  background: #ffffff !important;
+  // position: fixed !important;
+  // top: 0;
+  // left: 0;
+  // z-index: 99 !important;
+}

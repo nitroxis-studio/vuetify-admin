@@ -1,32 +1,110 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div>
+    <v-app v-if="$store.state.routeLoaded">
+      <!-- :full.sync="full && $vuetify.breakpoint.lgAndUp" -->
+      <!-- + full + '-' + $vuetify.breakpoint.lg -->
+      <SideNav
+        v-if="showSidenav"
+        v-model="drawer"
+        @drawer-closed="drawer = false" />
+
+      <TopBar
+        v-if="showTopnav"
+        :title="$route.meta.title"
+        :title-btn="$route.meta.titleButton"
+        color="transparent"
+        @toggle="drawer = !drawer ">
+        <!-- @add="$router.push(pgLink)" -->
+        <template #addons>
+          <v-btn
+            v-if="$vuetify.breakpoint.mdAndDown"
+            class="mr-2"
+            icon
+            outlined
+            small
+            tile
+            color="grey lighten-2"
+            @click="drawer = !drawer">
+            <v-icon color="grey">mdi-menu</v-icon>
+          </v-btn>
+        </template>
+      </TopBar>
+
+      <v-main class="bg">
+        <v-progress-linear
+          :active="$loading.loaders.length > 0"
+          absolute
+          top
+          :indeterminate="true"></v-progress-linear>
+        <v-container
+          fluid
+          class="bg ma-0 pa-0">
+          <vue-page-transition name="overlay-up-full">
+            <router-view :key="$route.fullPath" />
+          </vue-page-transition>
+          <MyToast />
+        </v-container>
+      </v-main>
+    </v-app>
+    <v-app v-else>
+      <v-main clipped>
+        <v-container fluid>
+          <PageLoader msg="Loading Application ..." />
+        </v-container>
+      </v-main>
+    </v-app>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import SideNav from "@/partials/Sidenav.vue"
+import TopBar from "@/partials/TopBar.vue"
+import MyToast from "@/plugins/toast/Toast.vue"
+import PageLoader from "@/components/PageLoader.vue"
+import Vue from "vue"
 
-#nav {
-  padding: 30px;
+export default Vue.extend({
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  components: {
+    SideNav,
+    MyToast,
+    TopBar,
+    PageLoader
+  },
+  data: function () {
+    return {
+      showSidenav: true,
+      showTopnav: true,
+      drawer: true,
+      full: true
+    }
+  },
+  computed: {
+    oppFull () {
+      return !this.full
+    }
+  },
+  watch: {
+    "$route.meta.layout" (v) {
+      switch (v) {
+        case "full":
+          this.showSidenav = false
+          this.showTopnav = false
+          break
+        case "topnav":
+          this.showSidenav = true
+          this.showTopnav = true
+          this.full = false
+          // this.drawer = false
+          break
+        default:
+          this.full = true
+          // this.drawer = true
+          this.showSidenav = true
+          this.showTopnav = true
+          break
+      }
     }
   }
-}
-</style>
+})
+</script>

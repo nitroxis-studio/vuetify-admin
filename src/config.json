@@ -1,0 +1,6 @@
+{
+  "APP_NAME": "NTX Admin",
+  "SUB_TITLE": "Admin Panel by Nitroxis",
+  "API_BASE_URL": "http://localhost:3000",
+  "LOGO": "/logo.svg"
+}
