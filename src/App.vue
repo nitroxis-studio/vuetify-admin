@@ -39,7 +39,7 @@
         <v-container
           fluid
           class="bg ma-0 pa-0">
-          <vue-page-transition name="overlay-up-full">
+          <vue-page-transition name="overlay-right">
             <router-view :key="$route.fullPath" />
           </vue-page-transition>
           <MyToast />

@@ -1,4 +1,4 @@
-import "@/scss/variables.scss"
+import "@/scss/main.scss"
 import "@mdi/font/css/materialdesignicons.css"
 import "roboto-fontface/css/roboto/roboto-fontface.css"
 import Vue from "vue"
