@@ -16,10 +16,18 @@ module.exports = {
     //   "error",
     //   2
     // ],
+    "@typescript-eslint/interface-name-prefix": [
+      "error",
+      {
+        prefixWithI: "always",
+        allowUnderscorePrefix: true
+      }
+    ],
     "comma-dangle": "error",
     "computed-property-spacing": "error",
     "arrow-spacing": "error",
     "key-spacing": "error",
+
     "keyword-spacing": "error",
     "no-multiple-empty-lines": [
       "error",
@@ -136,13 +144,17 @@ module.exports = {
         }
       }
     ],
-    "vue/html-indent": ["error", 2, {
-      "attribute": 1,
-      "baseIndent": 1,
-      "closeBracket": 0,
-      "alignAttributesVertically": true,
-      "ignores": []
-    }],
+    "vue/html-indent": [
+      "error",
+      2,
+      {
+        attribute: 1,
+        baseIndent: 1,
+        closeBracket: 0,
+        alignAttributesVertically: true,
+        ignores: []
+      }
+    ],
     "vue/html-closing-bracket-spacing": "warn",
     "vue/html-closing-bracket-newline": [
       "error",

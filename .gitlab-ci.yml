@@ -1,0 +1,16 @@
+before_script:
+- mkdir -p ~/.ssh
+- echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+- chmod 600 ~/.ssh/id_rsa
+- ssh-keyscan -H 'onlyn.app' >> ~/.ssh/known_hosts
+stages:
+- deploy
+
+deploy_to_dokku:
+  only:
+  - main
+  stage: deploy
+  script:
+  - git checkout main
+  - git pull
+  - git push dokku@onlyn.app:admin-app main

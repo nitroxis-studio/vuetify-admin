@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable camelcase */
 import { isArrayLike } from "lodash"
-import isMobilePhone from "validator/es/lib/isMobilePhone"
+import isLength from "validator/es/lib/isLength"
 import isURL from "validator/es/lib/isURL"
 import { extend, localize, ValidationObserver, ValidationProvider } from "vee-validate"
 import en from "vee-validate/dist/locale/en.json"
@@ -29,6 +29,11 @@ const urlOptions = {
   require_host: true
 }
 
+extend("ntxPassword", (v) => (new RegExp(/^[A-Z]{1,}/).test(v) && isLength(v, {
+  min: 8,
+  max: 32
+}) && new RegExp(/[\W]{1,}/).test(v)) ? true : "Password should start from Capital, more than 8 chars and have at least one non-alphanumeric character")
+
 extend("url", (v) => isURL(v, urlOptions))
 extend("fbUrl", (v) => isURL(v, {
   ...urlOptions,
@@ -39,7 +44,8 @@ extend("fbUrl", (v) => isURL(v, {
 }))
 
 // const pkMobileRegex = /03\d{2}-?\d{7}$/
-extend("mobile", (v) => isMobilePhone(v, "en-PK") ? true : "Enter a valid Number without Country code e.g. 0300-1112223")
+// extend("mobile", (v) => isMobilePhone(v, "en-PK") ? true : "Enter a valid Number without Country code e.g. 0300-1112223")
+extend("mobile", (v) => /03\d{2}(-|\s)?\d{7}$/.test(v) ? true : "Enter a valid Number without Country code e.g. 0300-1112223")
 
 extend("imageUrl", (v) => {
   if (isURL(v, urlOptions) && /\.(gif|jpe?g|png|webp|svg)$/i.test(v)) {

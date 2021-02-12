@@ -1,0 +1,12 @@
+{
+  "basePath": "",
+  "app": {
+    "APP_NAME": "Admin",
+    "SUB_TITLE": "Admin Panel",
+    "LOGO": "@/assets/logo.png"
+  },
+  "api": {
+    "API_BASE_URL": "https://api.onlyn.app",
+    "googlePlaces": "asdasdasdasdasdasd"
+  }
+}

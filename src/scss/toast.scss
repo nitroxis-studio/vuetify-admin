@@ -1,0 +1,61 @@
+@import "./variables.scss";
+.vue-notification {
+  margin-bottom: 20px;
+  margin-right: 20px;
+  box-shadow: 0 8px 6px 0px rgba(black, 0.3);
+  background: none;
+
+  padding-left: 40px;
+  position: relative;
+  &:before {
+    display: inline-block;
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: 32px;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "liga";
+    
+    position: absolute;
+    left: 10px;
+    top: 6px;
+  }
+
+  .notification-content {
+    padding: 10px;
+  }
+
+  &.info-notification {
+    &:before{ 
+      content: "\F2FC";
+    }
+    color: white;
+    border-left-color: darken($info, 20%);
+    background-color: $info;
+  }
+  &.warn-notification {
+    &:before{ 
+      content: "\F026";
+    }
+    color: white;
+    border-left-color: darken($warn, 20%);
+    background-color: $warn;
+  }
+  &.success-notification {
+    border-left-color: $success;
+    color: $success;
+    &:before{ 
+      content: "\F5E0";
+    }
+    color: white;
+    background-color: lighten($success, 6%);
+  }
+  &.error-notification {
+    &:before{ 
+      content: "\F026";
+    }
+    border-left-color: darken($error, 25%);
+    background-color: darken($error, 15%);
+    color: white;
+  }
+}

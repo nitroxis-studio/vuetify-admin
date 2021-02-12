@@ -16,6 +16,7 @@
         @toggle="drawer = !drawer ">
         <!-- @add="$router.push(pgLink)" -->
         <template #addons>
+
           <v-btn
             v-if="$vuetify.breakpoint.mdAndDown"
             class="mr-2"
@@ -31,18 +32,24 @@
       </TopBar>
 
       <v-main class="bg">
-        <v-progress-linear
+        <!-- <v-progress-linear
           :active="$loading.loaders.length > 0"
           absolute
           top
-          :indeterminate="true"></v-progress-linear>
+          :indeterminate="true"></v-progress-linear> -->
         <v-container
           fluid
           class="bg ma-0 pa-0">
-          <vue-page-transition name="overlay-right">
+          <vue-page-transition
+            name="fade-in-up">
             <router-view :key="$route.fullPath" />
           </vue-page-transition>
-          <MyToast />
+          <!-- <MyToast /> -->
+          <AppNotifications
+            width="420"
+            class="notification-style"
+            group="app"
+            position="bottom right" />
         </v-container>
       </v-main>
     </v-app>
@@ -59,20 +66,19 @@
 <script>
 import SideNav from "@/partials/Sidenav.vue"
 import TopBar from "@/partials/TopBar.vue"
-import MyToast from "@/plugins/toast/Toast.vue"
 import PageLoader from "@/components/PageLoader.vue"
 import Vue from "vue"
+import "@/scss/toast.scss"
 
 export default Vue.extend({
-
   components: {
     SideNav,
-    MyToast,
     TopBar,
     PageLoader
   },
   data: function () {
     return {
+      interval: null,
       showSidenav: true,
       showTopnav: true,
       drawer: true,

@@ -14,3 +14,5 @@ export const arrayToOptions = (name: string | number) => (state: {
 export function reloadBrowser (redirectUrl?: string) {
   window.location.href = redirectUrl ? redirectUrl : window.location.href
 }
+export const setStateVal = (property) => (state, payload) => (state[property] = payload)
+export const toggleStateVal = (property) => (state) => (state[property] = !state[property])
